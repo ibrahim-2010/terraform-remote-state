@@ -14,18 +14,36 @@ Welcome to the **Terraform Remote State Challenge**! This is an essential skill 
 
 ## 🚀 Quick Start
 
-### Step 1: Fork & Clone This Repository
+### Step 1: Get the Code
 
+**Option A: Fork (Easiest)**
 ```bash
-# Option A: Fork first (recommended for submitting work)
-# 1. Click "Fork" button on GitHub (top right)
+# 1. Click "Fork" button on GitHub (top right of this page)
 # 2. Clone YOUR fork:
 git clone https://github.com/YOUR-USERNAME/terraform-remote-state.git
 cd terraform-remote-state
+```
 
-# Option B: Clone directly (for practice only)
+**Option B: Clone & Create Your Own Repo**
+```bash
+# 1. Clone this repo
 git clone https://github.com/techlearn-center/terraform-remote-state.git
 cd terraform-remote-state
+
+# 2. Remove the original remote
+git remote remove origin
+
+# 3. Create a new repo on GitHub (github.com/new)
+# 4. Add your new repo as origin
+git remote add origin https://github.com/YOUR-USERNAME/YOUR-REPO-NAME.git
+git push -u origin main
+```
+
+**Option C: Clone Only (Practice, No Grading)**
+```bash
+git clone https://github.com/techlearn-center/terraform-remote-state.git
+cd terraform-remote-state
+# Note: You won't be able to push or get GitHub Actions grading
 ```
 
 ### Step 2: Choose Your Path

@@ -579,15 +579,64 @@ ssh -i private-key.pem ubuntu@<public-ip>
 
 ---
 
+## Two Ways to Complete This Challenge
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    CHOOSE YOUR PATH                              │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  🏠 OPTION 1: LocalStack (Free, Local)                          │
+│  ─────────────────────────────────────                          │
+│  • No AWS account needed                                        │
+│  • No cost                                                      │
+│  • Requires Docker                                              │
+│  • Great for learning and testing                               │
+│  • Resources are simulated locally                              │
+│                                                                 │
+│  Requirements:                                                  │
+│  ✅ Docker and Docker Compose                                   │
+│  ✅ Terraform CLI                                               │
+│  ✅ Python 3 (for dashboard and progress checker)               │
+│                                                                 │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  ☁️ OPTION 2: Real AWS (Production Experience)                   │
+│  ─────────────────────────────────────────────                  │
+│  • Actual AWS resources                                         │
+│  • Real-world experience                                        │
+│  • May incur small costs (free tier eligible)                   │
+│  • NO Docker needed!                                            │
+│  • SSH actually works to connect to EC2                         │
+│                                                                 │
+│  Requirements:                                                  │
+│  ✅ AWS Account (free tier works)                               │
+│  ✅ AWS CLI installed and configured                            │
+│  ✅ Terraform CLI                                               │
+│  ❌ Docker NOT required                                         │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+> **Recommendation:** Start with LocalStack to learn, then try real AWS when ready!
+
+---
+
 ## Prerequisites
 
-### Required
+### For LocalStack (Option 1)
 - ✅ Docker and Docker Compose installed
 - ✅ Terraform CLI installed (v1.0+)
-- ✅ Basic understanding of Terraform (complete terraform-basics first!)
-- ✅ Command line familiarity
+- ✅ Python 3 (for dashboard and run.py)
+- ✅ Basic understanding of Terraform
 
-### Helpful
+### For Real AWS (Option 2)
+- ✅ AWS Account ([Sign up free](https://aws.amazon.com/free/))
+- ✅ AWS CLI installed and configured
+- ✅ Terraform CLI installed (v1.0+)
+- ❌ Docker NOT required
+
+### Helpful Background
 - 📖 Completed [terraform-basics](https://github.com/techlearn-center/terraform-basics) challenge
 - 📖 Completed [terraform-3tier](https://github.com/techlearn-center/terraform-3tier) challenge
 - 📖 Basic understanding of AWS services
@@ -600,6 +649,19 @@ terraform --version
 
 # If not installed, see:
 # https://developer.hashicorp.com/terraform/downloads
+```
+
+### Install AWS CLI (for Real AWS)
+
+```bash
+# Check if installed
+aws --version
+
+# If not installed, see:
+# https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+
+# Configure (enter your Access Key ID and Secret)
+aws configure
 ```
 
 ---
@@ -814,6 +876,12 @@ python dashboard.py
 ## Deploying to Real AWS
 
 Want to deploy to actual AWS instead of LocalStack? Here's how:
+
+> **Note:** Docker and LocalStack are **NOT required** for real AWS deployment!
+> They are only used for free local testing. For real AWS, you just need:
+> - Terraform installed
+> - AWS CLI installed
+> - An AWS account with credentials
 
 ### Step 1: Get AWS Credentials
 

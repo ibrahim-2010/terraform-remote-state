@@ -799,6 +799,197 @@ export AWS_DEFAULT_REGION=us-east-1
 python run.py
 ```
 
+### Step 5: View the Dashboard
+
+```bash
+# Start the visual dashboard
+python dashboard.py
+
+# Opens at http://localhost:8080
+# Shows your S3, DynamoDB, IAM, EC2 resources
+```
+
+---
+
+## Deploying to Real AWS
+
+Want to deploy to actual AWS instead of LocalStack? Here's how:
+
+### Step 1: Get AWS Credentials
+
+1. Log in to [AWS Console](https://console.aws.amazon.com)
+2. Go to IAM → Users → Create User
+3. Attach `AdministratorAccess` policy (for learning only!)
+4. Create Access Key → Download credentials
+
+### Step 2: Configure AWS CLI
+
+```bash
+# Install AWS CLI if not installed
+# https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+
+# Configure credentials
+aws configure
+# Enter your Access Key ID
+# Enter your Secret Access Key
+# Default region: us-east-1
+# Default output: json
+```
+
+### Step 3: Modify Terraform Files for Real AWS
+
+In each module's `main.tf`, **remove or comment out** the LocalStack configuration:
+
+```hcl
+provider "aws" {
+  region = var.aws_region
+
+  # REMOVE THESE LINES for real AWS:
+  # access_key = "test"
+  # secret_key = "test"
+  # endpoints { ... }
+  # skip_credentials_validation = true
+  # skip_metadata_api_check     = true
+  # s3_use_path_style           = true
+}
+```
+
+Your `main.tf` for real AWS should look like:
+
+```hcl
+provider "aws" {
+  region = var.aws_region
+  # AWS CLI credentials will be used automatically
+}
+```
+
+### Step 4: Deploy!
+
+```bash
+cd backend
+terraform init
+terraform apply
+
+cd ../iam
+terraform init
+terraform apply
+
+cd ../compute
+terraform init
+terraform apply
+```
+
+### Step 5: Clean Up (Important!)
+
+To avoid AWS charges:
+
+```bash
+cd compute && terraform destroy -auto-approve
+cd ../iam && terraform destroy -auto-approve
+cd ../backend && terraform destroy -auto-approve
+```
+
+---
+
+## How Grading Works
+
+Your challenge is graded in **two ways**:
+
+### 1. Local Progress Checker (`run.py`)
+
+Run anytime to check your progress:
+
+```bash
+python run.py
+```
+
+**Output Example:**
+```
+============================================================
+              CHALLENGE PROGRESS SUMMARY
+============================================================
+
+  Total Checks: 21
+  Passed: 21
+  Failed: 0
+
+  Progress: 100.0%
+
+  [========================================]
+
+  Congratulations! All checks passed!
+```
+
+### 2. GitHub Actions (Automated Grading)
+
+When you push to GitHub, the workflow automatically grades your work:
+
+**What it checks:**
+| Component | Points | Requirements |
+|-----------|--------|--------------|
+| S3 Bucket | 4 | Bucket, versioning, encryption, public block |
+| DynamoDB | 2 | Table resource, LockID hash key |
+| IAM User | 3 | User, access key, policy attachment |
+| IAM Policy | 3 | Policy resource, S3 perms, DynamoDB perms |
+| SSH Keys | 3 | TLS key, AWS key pair, local file |
+| Security Group | 2 | SG resource, port 22 |
+| EC2 Instance | 4 | Instance, AMI data, key_name, security group |
+| **Total** | **21** | **75% needed to pass** |
+
+**To see your grade:**
+1. Push your code to GitHub
+2. Go to your repo → Actions tab
+3. Click on the latest workflow run
+4. View the "Calculate Total Score" step
+
+**Sample Grade Output:**
+```
+========================================
+       CHALLENGE GRADING SUMMARY
+========================================
+
+S3 Bucket:      4/4
+DynamoDB:       2/2
+IAM User:       3/3
+IAM Policy:     3/3
+SSH Keys:       3/3
+Security Group: 2/2
+EC2 Instance:   4/4
+
+========================================
+TOTAL SCORE: 21/21 (100%)
+========================================
+
+Congratulations! All checks passed!
+```
+
+---
+
+## Using the Dashboard
+
+The dashboard provides a visual way to see your AWS resources:
+
+```bash
+python dashboard.py
+```
+
+### Features:
+- **S3 Buckets** - Shows your state bucket with versioning status
+- **DynamoDB Tables** - Shows your lock table with hash key
+- **IAM Users** - Shows users and their access keys
+- **SSH Key Pairs** - Shows registered key pairs
+- **EC2 Instances** - Shows instances with IPs and state
+- **Security Groups** - Shows firewall rules
+
+### Click any section to learn more!
+Each section has educational explanations about the resource type.
+
+### Dashboard for Real AWS:
+```bash
+python dashboard.py --aws
+```
+This uses your AWS CLI credentials to show real AWS resources.
+
 ---
 
 ## Security Best Practices

@@ -1,37 +1,10 @@
-# EC2 Instance - STARTER FILE
-# ============================
-# TODO: Create an EC2 instance with SSH access!
-#
-# What is EC2?
-#   - EC2 = Elastic Compute Cloud
-#   - Virtual servers in the cloud
-#   - You choose: instance type, OS (AMI), storage, network
-#
-# Key Components:
-#   - AMI: The operating system image (Amazon Linux 2, Ubuntu, etc.)
-#   - Instance Type: Size/power (t2.micro is free tier!)
-#   - Key Pair: SSH key for secure access
-#   - Security Group: Firewall rules
-#   - Subnet: Network location
-#
-# Requirements:
-#   1. Create an EC2 instance using Amazon Linux 2 AMI
-#   2. Use t2.micro (free tier eligible)
-#   3. Attach the SSH key pair we created
-#   4. Attach the security group we created
-#   5. Add user data to install basic tools
-#
-# See README.md for detailed explanations!
-
-# =============================================================================
-# STEP 1: Create the EC2 Instance
-# =============================================================================
-# TODO: Uncomment and create the EC2 instance
-#
 resource "aws_instance" "web_server" {
   # Use the AMI we found in main.tf, or a specific AMI ID
   ami           = var.ami_id != "" ? var.ami_id : data.aws_ami.ubuntu.id
   instance_type = "t3.micro"
+  tags = {
+    Name = "terraform-state-dev"
+  }
 
   # Use the first available subnet
   subnet_id = data.aws_subnets.default.ids[0]

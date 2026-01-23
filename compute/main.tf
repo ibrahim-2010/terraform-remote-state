@@ -16,18 +16,14 @@ terraform {
     }
   }
 
-  # ===========================================================================
-  # TODO: Configure the S3 Remote Backend
-  # ===========================================================================
-  # Uncomment this block AFTER creating the backend resources!
-  #
+
   # Replace the values with outputs from the backend/ module:
   #   - bucket: from output "state_bucket_name"
   #   - dynamodb_table: from output "lock_table_name"
   #   - region: from output "aws_region"
-  #
+
   backend "s3" {
-    bucket         = "terraform-state-dev-2669aeb5" # Your bucket name
+    bucket         = "terraform-state-dev-bf19b78d" # Your bucket name
     key            = "compute/terraform.tfstate"    # Path in the bucket
     region         = "us-east-1"                    # AWS region
     encrypt        = true                           # Enable encryption

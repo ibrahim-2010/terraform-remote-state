@@ -1,3 +1,6 @@
+# This creates the S3 bucket and DynamoDB table needed
+# for Terraform remote state storage.
+
 terraform {
   required_version = ">= 1.2"
 
@@ -39,6 +42,8 @@ provider "aws" {
     tags = var.tags
   }
 }
+
+# S3 bucket names must be globally unique, so we add a random suffix
 
 resource "random_id" "bucket_suffix" {
   byte_length = 4

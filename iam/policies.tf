@@ -1,3 +1,7 @@
+# This policy allows:
+#   - Reading and writing to the S3 state bucket
+#   - Reading and writing locks in DynamoDB
+
 resource "aws_iam_policy" "terraform_state_access" {
   name        = "TerraformStateAccess"
   description = "Policy for accessing Terraform state in S3 and DynamoDB lock table"
@@ -15,7 +19,7 @@ resource "aws_iam_policy" "terraform_state_access" {
         ]
         # NOTE: Replace with your actual bucket ARN from backend outputs
         # Or use a variable: var.state_bucket_arn
-        Resource = "arn:aws:s3:::terraform-state-dev-2669aeb5"
+        Resource = "arn:aws:s3:::terraform-state-dev-bf19b78d"
       },
       # S3 Object Access
       {
@@ -27,7 +31,7 @@ resource "aws_iam_policy" "terraform_state_access" {
           "s3:DeleteObject" # Delete old state versions
         ]
         # Allow access to all objects in the bucket
-        Resource = "arn:aws:s3:::terraform-state-dev-2669aeb5"
+        Resource = "arn:aws:s3:::terraform-state-dev-bf19b78d"
       },
       # DynamoDB Lock Table Access
       {
@@ -68,6 +72,8 @@ resource "aws_iam_policy" "ec2_management" {
     ]
   })
 }
+
+# Attach EC2 policy to user
 
 resource "aws_iam_user_policy_attachment" "terraform_deployer_ec2" {
   user       = aws_iam_user.terraform_deployer.name

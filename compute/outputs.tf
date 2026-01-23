@@ -33,14 +33,11 @@ output "security_group_id" {
   value       = aws_security_group.ssh_access.id
 }
 
-# =============================================================================
-# SSH Connection Command
-# =============================================================================
 # This is the most useful output - a ready-to-use SSH command!
-#
+
 output "ssh_command" {
   description = "Command to SSH into the EC2 instance"
-  value       = "ssh -i ${local_file.private_key.filename} ec2-user@${aws_instance.web_server.public_ip}"
+  value       = "ssh -i ${local_file.private_key.filename} ubuntu@${aws_instance.web_server.public_ip}"
 }
 
 # =============================================================================

@@ -9,14 +9,14 @@ resource "aws_iam_user" "terraform_deployer" {
   }
 }
 
-
 # These keys allow programmatic access to AWS.
 # You'll use these to configure AWS CLI or Terraform.
-#
+
 resource "aws_iam_access_key" "terraform_deployer" {
   user = aws_iam_user.terraform_deployer.name
 }
 
+# This connects the user to the policy, giving them permissions.
 
 resource "aws_iam_user_policy_attachment" "terraform_deployer" {
   user       = aws_iam_user.terraform_deployer.name

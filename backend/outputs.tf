@@ -20,7 +20,7 @@ output "lock_table_arn" {
 
 output "aws_region" {
   description = "AWS region where resources are created"
-  value       = us-east-1
+  value       = "us-east-1"
 }
 
 # =============================================================================

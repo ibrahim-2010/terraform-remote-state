@@ -1,6 +1,3 @@
-# Variables for IAM Configuration
-# =================================
-
 variable "project_name" {
   description = "Project name used for resource naming"
   type        = string
@@ -29,13 +26,13 @@ variable "localstack_endpoint" {
 variable "state_bucket_arn" {
   description = "ARN of the S3 bucket for Terraform state (from backend module)"
   type        = string
-  default     = ""  # Will be set after creating backend
+  default     = "" # Will be set after creating backend
 }
 
 variable "lock_table_arn" {
   description = "ARN of the DynamoDB table for state locking (from backend module)"
   type        = string
-  default     = ""  # Will be set after creating backend
+  default     = "" # Will be set after creating backend
 }
 
 variable "tags" {

@@ -1,16 +1,5 @@
-# IAM Configuration - Main File
-# ==============================
-# This creates IAM users and policies for Terraform access.
-#
-# What is IAM?
-#   - IAM = Identity and Access Management
-#   - Controls WHO can do WHAT in AWS
-#   - Users = people or services
-#   - Policies = rules about what's allowed
-#   - Access Keys = username/password for programmatic access
-
 terraform {
-  required_version = ">= 1.0.0"
+  required_version = ">= 1.2"
 
   required_providers {
     aws = {
@@ -20,9 +9,8 @@ terraform {
   }
 }
 
-# Provider Configuration (same pattern as backend/)
 provider "aws" {
-  region = var.aws_region
+  region = "us-east-1"
 
   dynamic "endpoints" {
     for_each = var.use_localstack ? [1] : []
@@ -46,5 +34,4 @@ provider "aws" {
   }
 }
 
-# Get the current AWS account ID
 data "aws_caller_identity" "current" {}

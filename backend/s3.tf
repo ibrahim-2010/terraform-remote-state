@@ -1,7 +1,7 @@
 resource "aws_s3_bucket" "terraform_state" {
   bucket = local.bucket_name
 
-  
+
   force_destroy = true
 
   tags = {
@@ -28,8 +28,8 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "terraform_state" 
       # For higher security, use "aws:kms" with a KMS key
       sse_algorithm = "AES256"
     }
-   }
- }
+  }
+}
 
 resource "aws_s3_bucket_public_access_block" "terraform_state" {
   bucket = aws_s3_bucket.terraform_state.id

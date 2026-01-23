@@ -38,7 +38,7 @@ variable "localstack_endpoint" {
 variable "instance_type" {
   description = "EC2 instance type"
   type        = string
-  default     = "t2.micro"  # Free tier eligible!
+  default     = "t2.micro" # Free tier eligible!
 }
 
 variable "ami_id" {
@@ -56,13 +56,13 @@ variable "ami_id" {
 variable "state_bucket_name" {
   description = "Name of the S3 bucket for Terraform state"
   type        = string
-  default     = ""  # Set this from backend outputs!
+  default     = "" # Set this from backend outputs!
 }
 
 variable "lock_table_name" {
   description = "Name of the DynamoDB table for state locking"
   type        = string
-  default     = ""  # Set this from backend outputs!
+  default     = "" # Set this from backend outputs!
 }
 
 variable "tags" {

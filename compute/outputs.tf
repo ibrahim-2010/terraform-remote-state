@@ -1,45 +1,32 @@
-# Compute Outputs - STARTER FILE
-# ================================
-# TODO: Add outputs for the created resources!
-#
-# These outputs help you connect to your instance and verify the setup.
+output "instance_id" {
+  description = "ID of the EC2 instance"
+  value       = aws_instance.web_server.id
+}
 
-# =============================================================================
-# TODO: Uncomment these outputs after completing the other files
-# =============================================================================
+output "instance_public_ip" {
+  description = "Public IP address of the EC2 instance"
+  value       = aws_instance.web_server.public_ip
+}
 
-# EC2 Instance Outputs
-# output "instance_id" {
-#   description = "ID of the EC2 instance"
-#   value       = aws_instance.web_server.id
-# }
+output "instance_private_ip" {
+  description = "Private IP address of the EC2 instance"
+  value       = aws_instance.web_server.private_ip
+}
 
-# output "instance_public_ip" {
-#   description = "Public IP address of the EC2 instance"
-#   value       = aws_instance.web_server.public_ip
-# }
+output "key_pair_name" {
+  description = "Name of the SSH key pair"
+  value       = aws_key_pair.deployer.key_name
+}
 
-# output "instance_private_ip" {
-#   description = "Private IP address of the EC2 instance"
-#   value       = aws_instance.web_server.private_ip
-# }
+output "private_key_file" {
+  description = "Path to the private key file"
+  value       = local_file.private_key.filename
+}
 
-# SSH Key Outputs
-# output "key_pair_name" {
-#   description = "Name of the SSH key pair"
-#   value       = aws_key_pair.deployer.key_name
-# }
-
-# output "private_key_file" {
-#   description = "Path to the private key file"
-#   value       = local_file.private_key.filename
-# }
-
-# Security Group Output
-# output "security_group_id" {
-#   description = "ID of the security group"
-#   value       = aws_security_group.ssh_access.id
-# }
+output "security_group_id" {
+  description = "ID of the security group"
+  value       = aws_security_group.ssh_access.id
+}
 
 # =============================================================================
 # SSH Connection Command

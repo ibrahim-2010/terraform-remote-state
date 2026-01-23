@@ -3,6 +3,11 @@ output "instance_id" {
   value       = aws_instance.web_server.id
 }
 
+output "public_ip" {
+  description = "Public IP address of the EC2 instance"
+  value       = aws_instance.web_server.public_ip
+}
+
 output "instance_public_ip" {
   description = "Public IP address of the EC2 instance"
   value       = aws_instance.web_server.public_ip
@@ -33,10 +38,10 @@ output "security_group_id" {
 # =============================================================================
 # This is the most useful output - a ready-to-use SSH command!
 #
-# output "ssh_command" {
-#   description = "Command to SSH into the EC2 instance"
-#   value       = "ssh -i ${local_file.private_key.filename} ec2-user@${aws_instance.web_server.public_ip}"
-# }
+output "ssh_command" {
+  description = "Command to SSH into the EC2 instance"
+  value       = "ssh -i ${local_file.private_key.filename} ec2-user@${aws_instance.web_server.public_ip}"
+}
 
 # =============================================================================
 # After running terraform apply, connect with:
